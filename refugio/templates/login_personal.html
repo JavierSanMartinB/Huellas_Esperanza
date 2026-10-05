@@ -1,0 +1,52 @@
+  <title>Iniciar sesión | Huellas de Esperanza</title>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f2f4ee" />
+    <title>Acceso de personal | Huellas de Esperanza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      :root { --forest: #19483d; --leaf: #397763; --paper: #f2f4ee; --ink: #20332e; --muted: #687a73; }
+      body { min-height: 100vh; display: grid; place-items: center; padding: 1.25rem; color: var(--ink); font-family: 'DM Sans', sans-serif; background: var(--paper); }
+      h1 { color: var(--forest); font-family: 'Fraunces', Georgia, serif; }
+      .login-shell { width: min(100%, 440px); padding: clamp(1.5rem, 5vw, 2.75rem); border: 1px solid #e0e7df; border-radius: 8px; background: #fff; box-shadow: 0 18px 55px rgba(32, 51, 46, .1); }
+      .brand { color: var(--forest); font-weight: 700; text-decoration: none; }
+      .eyebrow { color: var(--leaf); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+      .form-control { min-height: 46px; border-color: #d8e0da; border-radius: 6px; }
+      .form-control:focus { border-color: var(--leaf); box-shadow: 0 0 0 .2rem rgba(57, 119, 99, .14); }
+      .form-label { font-size: .9rem; font-weight: 600; }
+      .submit-button { min-height: 48px; color: #fff; background: var(--forest); border-color: var(--forest); font-weight: 700; }
+      .submit-button:hover { color: #fff; background: var(--leaf); border-color: var(--leaf); }
+      .back-link { color: var(--muted); text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <main class="login-shell">
+      <a class="brand" href="{% url 'index' %}">Huellas de Esperanza</a>
+      <p class="eyebrow mt-4 mb-2">Acceso restringido</p>
+      <p class="eyebrow mt-4 mb-2">Tu cuenta</p>
+      <h1 class="h2 mb-2">Iniciar sesión</h1>
+      <p class="text-secondary mb-4">Ingresa con el correo y la contraseña de tu cuenta. Si formas parte del personal activo, también tendrás acceso a sus herramientas.</p>
+      {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label" for="correo">Correo electrónico</label>
+          <input class="form-control" id="correo" name="correo" type="email" autocomplete="username" required autofocus />
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="contrasena">Contraseña</label>
+          <input class="form-control" id="contrasena" name="contrasena" type="password" autocomplete="current-password" required />
+        </div>
+        <button class="btn submit-button w-100" type="submit">Iniciar sesión</button>
+      </form>
+      <p class="text-center mt-4 mb-2">¿Aún no tienes cuenta? <a class="back-link small fw-semibold" href="{% url 'registro' %}">Crear cuenta</a></p>
+      <p class="text-center mb-0"><a class="back-link small" href="{% url 'index' %}">Volver al catálogo</a></p>
+    </main>
+  </body>
+</html>
